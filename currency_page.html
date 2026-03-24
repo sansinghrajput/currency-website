@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>The Presidential Currency Gallery</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
+
+<style>
+:root{
+    --gold:#d4af37;
+    --dark:#020617;
+    --glass:rgba(255,255,255,0.12);
+}
+
+*{margin:0;padding:0;box-sizing:border-box}
+
+body{
+    font-family:'Poppins',sans-serif;
+    background:radial-gradient(circle at top,#1e293b,var(--dark));
+    color:#f8fafc;
+}
+
+/* ✅ BACK BUTTON */
+.back-btn{
+    position:absolute;
+    top:20px;
+    left:20px;
+    text-decoration:none;
+    background:#d4af37;
+    color:black;
+    padding:10px 18px;
+    border-radius:25px;
+    font-size:0.9rem;
+    font-weight:500;
+    transition:0.3s;
+    z-index:1000;
+}
+
+.back-btn:hover{
+    background:white;
+    transform:scale(1.05);
+}
+
+header{
+    text-align:center;
+    padding:60px 20px 40px;
+}
+
+header h1{
+    font-family:'Cinzel',serif;
+    font-size:3rem;
+    color:var(--gold);
+}
+
+header p{opacity:0.85}
+
+.gallery{
+    max-width:1400px;
+    margin:auto;
+    padding:20px;
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:28px;
+}
+
+@media (max-width: 992px){
+    .gallery{
+        grid-template-columns:repeat(2,1fr);
+    }
+}
+
+@media (max-width: 576px){
+    .gallery{
+        grid-template-columns:1fr;
+    }
+}
+
+.card{
+    background:var(--glass);
+    backdrop-filter:blur(14px);
+    border:1px solid rgba(255,255,255,0.15);
+    border-radius:20px;
+    padding:20px;
+    text-align:center;
+    transition:0.4s;
+}
+
+.card:hover{
+    transform:translateY(-10px) scale(1.03);
+    box-shadow:0 25px 60px rgba(0,0,0,0.6);
+}
+
+.card img{
+    width:100%;
+    height:150px;
+    object-fit:contain;
+    margin-bottom:12px;
+}
+
+.card h3{
+    font-family:'Cinzel',serif;
+    color:var(--gold);
+}
+
+.card span{font-size:0.85rem;opacity:0.8}
+
+.rate{
+    margin-top:6px;
+    font-size:0.9rem;
+    color:#a5f3fc;
+}
+
+.fav{
+    margin-top:6px;
+    color:#facc15;
+    font-size:0.9rem;
+}
+
+footer{
+    text-align:center;
+    padding:20px;
+    opacity:0.7;
+    font-size:0.85rem;
+}
+</style>
+</head>
+
+<body>
+
+<!-- ✅ BACK BUTTON ADDED HERE -->
+<a href="home_currency_page.html" class="back-btn">← Home</a>
+
+<header>
+<h1>The Presidential Currency Gallery</h1>
+<p>Foreign currency collection by </p>
+<p><strong>Sandeepsingh Rajput</strong></p>
+</header>
+
+<section class="gallery">
+
+<div class="card"><img src="C:\Users\sande\Downloads\currency\5_euro.jpg"><h3>5 Euro</h3><span>European Union</span><div class="rate">≈ ₹450</div><div class="fav">★ Favourite</div></div>
+
+<div class="card"><img src="C:\Users\sande\Downloads\currency\malasiya.jpg"><h3>1 Ringgit</h3><span>Malaysia</span><div class="rate">≈ ₹19</div><div class="fav">★ Favourite</div></div>
+
+
+<div class="card">
+    <img src="C:\Users\sande\Downloads\Currency_Gallary\images\qatar.jpg">
+    <h3>5 Riyal</h3>
+    <span>Qatar</span>
+    <div class="rate">≈ ₹113</div>
+    <div class="fav">★ Favourite</div>
+</div>
+<div class="card"><img src="C:\Users\sande\Downloads\currency\United_States_one_dollar_bill,_obverse.jpg"><h3>1 Dollar</h3><span>United States of America</span><div class="rate">≈ ₹90</div><div class="fav">★ Favourite</div></div>
+
+
+
+<div class="card"><img src="C:\Users\sande\Downloads\currency\united-arab-emirates-five-dirhams-260nw-2501757099.jpg"><h3>5 Dirham</h3><span>United Arab Emirates</span><div class="rate">≈ ₹113</div><div class="fav">★ Favourite</div></div>
+
+
+<div class="card"><img src="C:\Users\sande\Downloads\currency\ARE-10-Front.png"><h3>10 Dirham</h3><span>United Arab Emirates</span><div class="rate">≈ ₹226</div></div>
+
+<div class="card"><img src="C:\Users\sande\Downloads\currency\thailand.jpg"><h3>20 Baht</h3><span>Thailand</span><div class="rate">≈ ₹56</div><div class="fav">★ Favourite</div></div>
+
+
+<div class="card"><img src="C:\Users\sande\Downloads\Currency_Gallary\images\WhatsApp Image 2026-02-15 at 9.46.22 PM.jpeg"><h3>100 Baht</h3><span>Thailand</span><div class="rate">≈ ₹280</div><div class="fav">★ Favourite</div></div>
+
+
+<div class="card"><img src="C:\Users\sande\Downloads\Currency_Gallary\images\WhatsApp Image 2026-02-15 at 9.46.19 PM.jpeg"><h3>20 Baht</h3><span>Thailand</span><div class="rate">≈ ₹56</div><div class="fav">★ Favourite</div></div>
+
+
+<div class="card"><img src="C:\Users\sande\Downloads\currency\63ce4f30a7a8d1.74948176-original.jpg"><h3>200 Som</h3><span>Uzbekistan</span><div class="rate">≈ ₹1.3</div></div>
+
+<div class="card"><img src="C:\Users\sande\Downloads\currency\uzbekistan-1000-som-banknote-unc-national-ornaments-amir-timur-museum-in-tashkent-629477-1.jpg"><h3>1000 Som</h3><span>Uzbekistan</span><div class="rate">≈ ₹6.5</div></div>
+
+<div class="card"><img src="C:\Users\sande\Downloads\currency\degt8f.jpg"><h3>10 Naira</h3><span>Nigeria</span><div class="rate">≈ ₹6</div></div>
+
+<div class="card"><img src="C:\Users\sande\Downloads\currency\products-17315.jpg"><h3>20 Rupees</h3><span>Sri Lanka</span><div class="rate">≈ ₹6</div></div>
+
+<div class="card"><img src="C:\Users\sande\Downloads\currency\products-17319.jpg"><h3>100 Rupees</h3><span>Sri Lanka</span><div class="rate">≈ ₹30</div></div>
+
+<div class="card"><img src="C:\Users\sande\Downloads\currency\91vZhS7NaPL._AC_UF350,350_QL80_.jpg"><h3>2 Bolívar</h3><span>Venezuela</span><div class="rate">≈ ₹5</div></div>
+
+
+
+<div class="card"><img src="C:\Users\sande\Downloads\currency\63fdf88a27bed7.07596226-original.jpg"><h3>1 Ngultrum</h3><span>Bhutan</span><div class="rate">≈ ₹1</div></div>
+
+<div class="card"><img src="C:\Users\sande\Downloads\currency\626bec0f667df6.60208723-original.jpg"><h3>5 Ngultrum</h3><span>Bhutan</span><div class="rate">≈ ₹5</div></div>
+
+<div class="card"><img src="C:\Users\sande\Downloads\currency\626bebc444cd02.60788553-original.jpg"><h3>10 Ngultrum</h3><span>Bhutan</span><div class="rate">≈ ₹10</div></div>
+
+<div class="card"><img src="C:\Users\sande\Downloads\currency\myanmar-20-twenty-kyat-bank-note-B4TWWK.jpg"><h3>20 Kyat</h3><span>Myanmar</span><div class="rate">≈ ₹0.8</div></div>
+
+<div class="card"><img src="C:\Users\sande\Downloads\currency\623b5061e772e1.76364944-original.jpg"><h3>50 Kyat</h3><span>Myanmar</span><div class="rate">≈ ₹2</div></div>
+
+<div class="card"><img src="C:\Users\sande\Downloads\currency\63fa26ded33e93.59942909-original.jpg"><h3>200 Kyat</h3><span>Myanmar</span><div class="rate">≈ ₹7</div></div>
+
+<div class="card"><img src="C:\Users\sande\Downloads\currency\626e30ee78fad8.79861835-original.jpg"><h3>1000 Rupiah</h3><span>Indonesia</span><div class="rate">≈ ₹5.5</div></div>
+
+<div class="card"><img src="C:\Users\sande\Downloads\currency\KHM1000P67a.jpg"><h3>1000 Riel</h3><span>Cambodia</span><div class="rate">≈ ₹20</div></div>
+
+<div class="card"><img src="C:\Users\sande\Downloads\currency\products-15942.jpg"><h3>100 Riel</h3><span>Cambodia</span><div class="rate">≈ ₹2</div></div>
+
+<div class="card"><img src="C:\Users\sande\Downloads\currency\products-16900.jpg"><h3>20 Rupees</h3><span>Nepal</span><div class="rate">≈ ₹12.6</div></div>
+
+<div class="card"><img src="C:\Users\sande\Downloads\currency\products-16898.jpg"><h3>10 Rupees</h3><span>Nepal</span><div class="rate">≈ ₹6.3</div></div>
+
+<div class="card"><img src="C:\Users\sande\Downloads\currency\products-16896.jpg"><h3>5 Rupees</h3><span>Nepal</span><div class="rate">≈ ₹3.1</div></div>
+
+<div class="card"><img src="C:\Users\sande\Downloads\currency\photo201959.jpeg"><h3>1 Rupee</h3><span>Nepal</span><div class="rate">≈ ₹0.63</div></div>
+
+<div class="card"><img src="C:\Users\sande\Downloads\currency\62ca886b9442d1.43867916-original.jpg"><h3>1 Yi Jiao</h3><span>China</span><div class="rate">≈ ₹1.2</div></div>
+
+<div class="card"><img src="C:\Users\sande\Downloads\currency\products-16086.jpg"><h3>50 Francs</h3><span>Congo</span><div class="rate">≈ ₹1.5</div></div>
+
+<div class="card"><img src="C:\Users\sande\Downloads\currency\64512fd6d9b187.62282441-original.jpg"><h3>5 Taka (Old)</h3><span>Bangladesh</span><div class="rate">≈ ₹4</div></div>
+
+<div class="card"><img src="C:\Users\sande\Downloads\currency\67c02a1592ab3.jpg"><h3>5 Taka</h3><span>Bangladesh</span><div class="rate">≈ ₹4</div></div>
+
+<div class="card"><img src="C:\Users\sande\Downloads\currency\products-15752.jpg"><h3>2 Taka</h3><span>Bangladesh</span><div class="rate">≈ ₹1.6</div></div></section>
+
+<footer>
+© 2025 Sandeepsingh Rajput · Presidential Foreign Currency Collection
+</footer>
+
+</body>
+</html>

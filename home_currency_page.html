@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>The Presidential Collection - Home</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif;}
+
+body{
+    background:linear-gradient(135deg,#0f172a,#1e3a8a,#9333ea);
+    color:white;
+    overflow-x:hidden;
+}
+
+/* Animated BG */
+body::before{
+    content:"";
+    position:fixed;
+    width:200%;
+    height:200%;
+    background:radial-gradient(circle,#ffffff20,transparent 60%);
+    animation:moveBg 12s linear infinite;
+    pointer-events:none;
+}
+@keyframes moveBg{
+    0%{transform:translate(0,0)}
+    50%{transform:translate(-20%,-20%)}
+    100%{transform:translate(0,0)}
+}
+
+/* Navbar */
+.navbar{
+    width:100%;
+    display:flex;
+    justify-content:space-between;
+    padding:15px 40px;
+    background:rgba(0,0,0,0.3);
+    backdrop-filter:blur(10px);
+    position:fixed;
+    top:0;
+}
+
+.navbar h2{color:#ffd700;font-family:'Cinzel';}
+
+.navbar a{
+    color:white;
+    text-decoration:none;
+    margin-left:20px;
+}
+
+/* Hero */
+.hero{
+    text-align:center;
+    margin-top:120px;
+}
+
+.hero h1{
+    font-family:'Cinzel';
+    font-size:3rem;
+    color:#ffd700;
+}
+
+.btn{
+    margin-top:20px;
+    display:inline-block;
+    padding:15px 35px;
+    background:linear-gradient(45deg,#ffd700,#ff8c00);
+    color:black;
+    border-radius:30px;
+    text-decoration:none;
+    font-weight:600;
+}
+
+/* Counter */
+.stats{
+    display:flex;
+    justify-content:center;
+    gap:40px;
+    margin:50px;
+}
+
+.stat{
+    text-align:center;
+}
+
+.stat span{
+    font-size:2rem;
+    color:#ffd700;
+}
+
+/* Slider */
+.slider{
+    width:80%;
+    margin:40px auto;
+    overflow:hidden;
+}
+
+.slide-track{
+    display:flex;
+    animation:scroll 15s linear infinite;
+}
+
+.slide-track img{
+    width:200px;
+    margin:10px;
+}
+
+@keyframes scroll{
+    0%{transform:translateX(0)}
+    100%{transform:translateX(-50%)}
+}
+
+/* Cards */
+.container{
+    display:flex;
+    justify-content:center;
+    gap:30px;
+    flex-wrap:wrap;
+    margin:40px;
+}
+
+.card{
+    background:rgba(255,255,255,0.1);
+    padding:20px;
+    border-radius:15px;
+    width:250px;
+    text-align:center;
+}
+</style>
+</head>
+
+<body>
+
+<!-- Navbar -->
+<div class="navbar">
+    <h2>Collection</h2>
+    <div>
+        <a href="#">Home</a>
+        <a href="currency_page.html">Collection</a>
+        <a href="#">About</a>
+    </div>
+</div>
+
+<!-- Hero -->
+<div class="hero">
+    <h1>Presidential Currency Collection</h1>
+    <p>Explore the world through currencies</p>
+    <a href="currency_page.html" class="btn">View Collection</a>
+</div>
+
+<!-- Counter -->
+<div class="stats">
+    <div class="stat">Notes <br><span id="notes">0</span></div>
+    <div class="stat">Countries <br><span id="countries">0</span></div>
+    <div class="stat">Favorites <br><span id="fav">0</span></div>
+</div>
+
+<!-- Slider -->
+<div class="slider">
+    <div class="slide-track">
+        <img src="C:\Users\sande\Downloads\currency\5_euro.jpg">
+        <img src="C:\Users\sande\Downloads\currency\United_States_one_dollar_bill,_obverse.jpg">
+        <img src="C:\Users\sande\Downloads\currency\ARE-10-Front.png">
+        <img src="C:\Users\sande\Downloads\Currency_Gallary\images\qatar.jpg">
+        <img src="C:\Users\sande\Downloads\Currency_Gallary\images\WhatsApp Image 2026-02-15 at 9.46.22 PM.jpeg">
+        <img src="C:\Users\sande\Downloads\currency\63ce4f30a7a8d1.74948176-original.jpg">
+    </div>
+</div>
+
+<!-- Cards -->
+<div class="container">
+    <div class="card">
+        <h3>💰 Foreign Notes</h3>
+        <p>Rare currencies collection</p>
+    </div>
+
+    <div class="card">
+        <h3>🌍 Countries</h3>
+        <p>From across the world</p>
+    </div>
+
+    <div class="card">
+        <h3>⭐ Favorites</h3>
+        <p>Euro & Dollar</p>
+    </div>
+</div>
+
+<!-- Counter Script -->
+<script>
+function animate(id, target){
+    let count = 0;
+    let speed = target/100;
+
+    let update = setInterval(()=>{
+        count += speed;
+        if(count >= target){
+            document.getElementById(id).innerText = target + "+";
+            clearInterval(update);
+        } else {
+            document.getElementById(id).innerText = Math.floor(count);
+        }
+    },20);
+}
+
+animate("notes",30);
+animate("countries",12);
+animate("fav",5);
+</script>
+
+</body>
+</html>
