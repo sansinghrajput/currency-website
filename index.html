@@ -5,201 +5,585 @@
 <title>The Presidential Collection of Sandeepsingh Rajput</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Marcellus&family=Manrope:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 
 <style>
-*{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif;}
+  :root{
+    --ink:#f0fafb;
+    --ink-2:#ffffff;
+    --ink-3:#0d2b30;
+    --paper:#ffffff;
+    --gold:#7fd8e0;
+    --gold-light:#0b7285;
+    --lilac:#0f9aa4;
+    --rust:#0e8a97;
+    --ivory:#16333a;
+    --line: rgba(11,114,133,0.28);
+  }
 
-body{
-    background:linear-gradient(135deg,#0f172a,#1e3a8a,#9333ea);
-    color:white;
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+
+  body{
+    font-family:'Manrope',sans-serif;
+    background:var(--ink);
+    color:var(--ivory);
     overflow-x:hidden;
-}
+    -webkit-font-smoothing:antialiased;
+  }
 
-/* Animated BG */
-body::before{
+  ::selection{ background:var(--gold); color:var(--ink-3); }
+
+  h1,h2,h3, .display{
+    font-family:'Marcellus', serif;
+    letter-spacing:0.01em;
+  }
+
+  .mono{
+    font-family:'Space Mono', monospace;
+  }
+
+  .eyebrow{
+    font-family:'Space Mono', monospace;
+    font-size:0.72rem;
+    letter-spacing:0.28em;
+    text-transform:uppercase;
+    color:var(--gold-light);
+  }
+
+  .eyebrow.lilac{ color:var(--lilac); }
+
+  a{ color:inherit; }
+
+  /* paper-grain texture, faint, over everything */
+  body::before{
     content:"";
     position:fixed;
-    width:200%;
-    height:200%;
-    background:radial-gradient(circle,#ffffff20,transparent 60%);
-    animation:moveBg 12s linear infinite;
+    inset:0;
     pointer-events:none;
-}
-@keyframes moveBg{
-    0%{transform:translate(0,0)}
-    50%{transform:translate(-20%,-20%)}
-    100%{transform:translate(0,0)}
-}
+    z-index:2;
+    opacity:0.05;
+    mix-blend-mode:overlay;
+    background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='140' height='140'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+  }
 
-/* Navbar */
-.navbar{
+  /* ---------- Navbar ---------- */
+  .navbar{
     width:100%;
     display:flex;
+    align-items:center;
     justify-content:space-between;
-    padding:15px 40px;
-    background:rgba(0,0,0,0.3);
+    flex-wrap:wrap;
+    row-gap:10px;
+    padding:20px 48px;
+    background:rgba(255,250,247,0.78);
     backdrop-filter:blur(10px);
-    position:fixed;
+    border-bottom:1px solid var(--line);
+    position:sticky;
     top:0;
-}
+    z-index:50;
+  }
 
-.navbar h2{color:#ffd700;font-family:'Cinzel';}
+  .nav-links{ display:flex; flex-wrap:wrap; row-gap:8px; }
 
-.navbar a{
-    color:white;
+  .brand{ display:flex; align-items:center; gap:12px; }
+
+  .seal{
+    width:34px; height:34px;
+    border-radius:50%;
+    border:1.5px solid var(--gold);
+    display:flex; align-items:center; justify-content:center;
+    font-family:'Marcellus', serif;
+    font-size:0.85rem;
+    color:var(--gold-light);
+    position:relative;
+  }
+  .seal::before{
+    content:"";
+    position:absolute; inset:4px;
+    border:1px solid var(--line);
+    border-radius:50%;
+  }
+
+  .navbar h2{
+    font-family:'Marcellus', serif;
+    font-size:1.05rem;
+    color:var(--gold-light);
+    font-weight:400;
+    letter-spacing:0.03em;
+  }
+
+  .nav-links a{
     text-decoration:none;
-    margin-left:20px;
-}
+    margin-left:32px;
+    font-size:0.82rem;
+    letter-spacing:0.12em;
+    text-transform:uppercase;
+    color:var(--ivory);
+    opacity:0.75;
+    transition:opacity .25s ease, color .25s ease;
+    padding-bottom:4px;
+    border-bottom:1px solid transparent;
+  }
+  .nav-links a:hover{ opacity:1; color:var(--gold-light); border-bottom-color:var(--gold); }
 
-/* Hero */
-.hero{
-    text-align:center;
-    margin-top:120px;
-}
-
-.hero h1{
-    font-family:'Cinzel';
-    font-size:3rem;
-    color:#ffd700;
-}
-
-.btn{
-    margin-top:20px;
-    display:inline-block;
-    padding:15px 35px;
-    background:linear-gradient(45deg,#ffd700,#ff8c00);
-    color:black;
-    border-radius:30px;
-    text-decoration:none;
-    font-weight:600;
-}
-
-/* Counter */
-.stats{
+  /* ---------- Hero ---------- */
+  .hero-wrap{
+    padding:0 24px 40px;
     display:flex;
     justify-content:center;
-    gap:40px;
-    margin:50px;
-}
+  }
 
-.stat{
+  .note{
+    position:relative;
+    width:min(920px, 100%);
+    padding:24px 40px 32px;
     text-align:center;
-}
-
-.stat span{
-    font-size:2rem;
-    color:#ffd700;
-}
-
-/* Slider */
-.slider{
-    width:80%;
-    margin:40px auto;
+    background:
+      linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0.08)),
+      var(--ink-2);
+    border:1px solid var(--line);
+    border-radius:6px;
     overflow:hidden;
-}
+    box-shadow:0 24px 60px -20px rgba(22,51,58,0.18);
+  }
 
-.slide-track{
+  /* engraved guilloche-ish weave, layered fine lines */
+  .note::before{
+    content:"";
+    position:absolute; inset:14px;
+    border:1px solid var(--line);
+    border-radius:3px;
+    pointer-events:none;
+  }
+  .note::after{
+    content:"";
+    position:absolute; inset:0;
+    pointer-events:none;
+    opacity:0.5;
+    background:
+      repeating-linear-gradient(115deg, transparent 0 6px, var(--line) 6px 7px, transparent 7px 13px),
+      repeating-linear-gradient(65deg, transparent 0 6px, rgba(11,114,133,0.14) 6px 7px, transparent 7px 13px);
+    mask-image: radial-gradient(ellipse at center, black 30%, transparent 72%);
+  }
+
+  .watermark{
+    position:absolute;
+    top:50%; left:50%;
+    transform:translate(-50%,-52%);
+    font-family:'Marcellus', serif;
+    font-size:min(22vw, 260px);
+    color:var(--gold);
+    opacity:0.05;
+    pointer-events:none;
+    white-space:nowrap;
+    z-index:0;
+  }
+
+  .note-content{ position:relative; z-index:1; }
+
+  .click-hint{
+    margin-top:12px;
+    font-size:0.8rem;
+    color: var(--gold-light);
+    opacity:0.85;
+  }
+
+  .hero-eyebrow{ margin-bottom:10px; }
+
+  .hero-subheading{
+    font-family:'Marcellus', serif;
+    font-style:italic;
+    font-size:1.05rem;
+    color:var(--ivory);
+    opacity:0.75;
+    margin-bottom:18px;
+  }
+
+  .note-content h1{
+    font-size:clamp(2rem, 4.4vw, 3.4rem);
+    line-height:1.15;
+    color:var(--ivory);
+    background:linear-gradient(100deg, var(--gold-light), var(--ivory) 45%, var(--gold-light));
+    -webkit-background-clip:text;
+    background-clip:text;
+    color:transparent;
+  }
+
+  .note-content p.tagline{
+    margin-top:18px;
+    font-size:0.98rem;
+    color:rgba(22,51,58,0.68);
+    max-width:520px;
+    margin-left:auto; margin-right:auto;
+    line-height:1.7;
+  }
+
+  .btn{
+    margin-top:34px;
+    display:inline-flex;
+    align-items:center;
+    gap:10px;
+    padding:15px 34px;
+    background:linear-gradient(180deg, #0e83a3, var(--gold-light));
+    color:#f4fdfe;
+    border-radius:2px;
+    text-decoration:none;
+    font-family:'Space Mono', monospace;
+    font-size:0.8rem;
+    letter-spacing:0.14em;
+    text-transform:uppercase;
+    font-weight:700;
+    box-shadow:0 10px 30px -8px rgba(11,114,133,0.3);
+    transition:transform .25s ease, box-shadow .25s ease;
+  }
+  .btn:hover{ transform:translateY(-2px); box-shadow:0 16px 36px -8px rgba(11,114,133,0.4); }
+  .btn svg{ width:14px; height:14px; }
+
+  .signature{
+    margin-top:46px;
+    display:inline-block;
+    padding-top:14px;
+    border-top:1px solid var(--line);
+  }
+  .signature .name{
+    font-family:'Marcellus', serif;
+    font-style:italic;
+    font-size:1.1rem;
+    color:var(--gold-light);
+  }
+  .signature .role{
+    margin-top:4px;
+    font-size:0.68rem;
+    letter-spacing:0.2em;
+    text-transform:uppercase;
+    color:rgba(22,51,58,0.55);
+  }
+
+  /* ---------- Ledger / stats ---------- */
+  .ledger{
+    max-width:920px;
+    margin:0 auto 70px;
+    padding:0 24px;
+  }
+  .ledger-title{
+    text-align:center;
+    margin-bottom:24px;
+  }
+  .ledger-title .eyebrow{ display:block; margin-bottom:10px; }
+  .ledger-title h2{ font-size:1.5rem; color:var(--ivory); font-weight:400; }
+
+  .stats{
     display:flex;
-    animation:scroll 15s linear infinite;
-}
+    border-top:1px solid var(--line);
+    border-bottom:1px solid var(--line);
+  }
 
-.slide-track img{
-    width:200px;
-    margin:10px;
-}
+  .stat{
+    flex:1;
+    text-align:center;
+    padding:34px 10px;
+    position:relative;
+  }
+  .stat + .stat::before{
+    content:"";
+    position:absolute;
+    left:0; top:20%; bottom:20%;
+    width:1px;
+    background:var(--line);
+  }
 
-@keyframes scroll{
+  .stat span{
+    display:block;
+    font-family:'Space Mono', monospace;
+    font-size:2.4rem;
+    font-weight:700;
+    color:var(--gold-light);
+  }
+  .stat label{
+    display:block;
+    margin-top:10px;
+    font-size:0.72rem;
+    letter-spacing:0.2em;
+    text-transform:uppercase;
+    color:rgba(22,51,58,0.6);
+  }
+
+  /* ---------- Gallery ---------- */
+  .gallery-section{ margin-bottom:70px; }
+  .section-head{
+    text-align:center;
+    margin-bottom:30px;
+    padding:0 24px;
+  }
+  .section-head .eyebrow{ display:block; margin-bottom:10px; }
+  .section-head h2{ font-size:1.6rem; font-weight:400; color:var(--ivory); }
+
+  .slider{
+    width:100%;
+    padding:30px 0 40px;
+    overflow:hidden;
+    -webkit-mask-image: linear-gradient(90deg, transparent, black 8%, black 92%, transparent);
+    mask-image: linear-gradient(90deg, transparent, black 8%, black 92%, transparent);
+  }
+
+  .slide-track{
+    display:flex;
+    width:max-content;
+    animation:scroll 32s linear infinite;
+  }
+  .slide-track:hover{ animation-play-state:paused; }
+
+  .slide-track figure{
+    flex:0 0 auto;
+    width:230px;
+    margin:0 22px;
+    background:var(--paper);
+    padding:12px 12px 16px;
+    border-radius:3px;
+    box-shadow:0 14px 32px -14px rgba(22,51,58,0.22);
+    transition:transform .3s ease, box-shadow .3s ease;
+  }
+  .slide-track figure:nth-child(odd){ transform:rotate(-2.5deg); }
+  .slide-track figure:nth-child(even){ transform:rotate(2deg); }
+  .slide-track figure:hover{ transform:rotate(0) translateY(-6px) scale(1.03); box-shadow:0 20px 40px -12px rgba(22,51,58,0.28); z-index:2; }
+
+  .slide-track img{
+    width:100%;
+    display:block;
+    border-radius:1px;
+    filter:sepia(0.06) contrast(1.02);
+  }
+
+  @keyframes scroll{
     0%{transform:translateX(0)}
     100%{transform:translateX(-50%)}
-}
+  }
 
-/* Cards */
-.container{
-    display:flex;
-    justify-content:center;
-    gap:30px;
-    flex-wrap:wrap;
-    margin:40px;
-}
+  /* ---------- Catalog ---------- */
+  .catalog{
+    max-width:1000px;
+    margin:0 auto 70px;
+    padding:0 24px;
+  }
 
-.card{
-    background:rgba(255,255,255,0.1);
-    padding:20px;
-    border-radius:15px;
-    width:250px;
+  .cat-row{
+    display:grid;
+    grid-template-columns:110px 1fr auto;
+    align-items:center;
+    gap:24px;
+    padding:26px 8px;
+    border-top:1px solid var(--line);
+    transition:background .25s ease;
+  }
+  .cat-row:last-child{ border-bottom:1px solid var(--line); }
+  .cat-row:hover{ background:rgba(11,114,133,0.08); }
+
+  .cat-num{
+    font-family:'Space Mono', monospace;
+    color:var(--gold-light);
+    font-size:0.85rem;
+    letter-spacing:0.05em;
+  }
+
+  .cat-body h3{
+    font-size:1.15rem;
+    font-weight:400;
+    color:var(--ivory);
+    margin-bottom:4px;
+  }
+  .cat-body p{
+    font-size:0.9rem;
+    color:rgba(22,51,58,0.6);
+  }
+
+  .cat-icon{ font-size:1.3rem; opacity:0.85; }
+
+  /* ---------- Footer ---------- */
+  footer{
     text-align:center;
-}
+    padding:34px 24px 50px;
+    border-top:1px solid var(--line);
+  }
+  footer p{
+    font-family:'Space Mono', monospace;
+    font-size:0.7rem;
+    letter-spacing:0.06em;
+    color:rgba(22,51,58,0.5);
+  }
+
+  /* ---------- Responsive ---------- */
+  @media (max-width: 720px){
+    .navbar{ padding:16px 20px; }
+    .nav-links a{ margin-left:16px; font-size:0.7rem; }
+    .note{ padding:32px 20px 30px; }
+    .stats{ flex-direction:column; }
+    .stat + .stat::before{ display:none; }
+    .stat + .stat{ border-top:1px solid var(--line); }
+    .cat-row{ grid-template-columns:60px 1fr; }
+    .cat-icon{ display:none; }
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    .slide-track{ animation:none; }
+    body::before{ display:none; }
+  }
+
+  a:focus-visible, .btn:focus-visible{
+    outline:2px solid var(--gold-light);
+    outline-offset:3px;
+  }
 </style>
 </head>
 
 <body>
 
+<nav class="navbar">
+  <div class="brand">
+    <div class="seal">SR</div>
+    <h2>Sandeepsingh Rajput</h2>
+  </div>
+  <div class="nav-links">
+    <a href="#home">Home</a>
+    <a href="currency_page.html">Collection</a>
+    <a href="#catalog">Catalog</a>
+    <a href="#contact">Contact</a>
+  </div>
+</nav>
+
 <!-- Hero -->
-<div class="hero">
-    <h1>The Presidential Currency Collection</h1>
-    <pre>Explore the world through currencies
-    of Sandeepsingh Rajput</pre>
-    <a href="currency_page.html" class="btn">View Collection</a>
-</div>
+<section class="hero-wrap" id="home">
+  <div class="note">
+    <span class="watermark">30+</span>
 
-<!-- Counter -->
-<div class="stats">
-    <div class="stat">Notes <br><span id="notes">0</span></div>
-    <div class="stat">Countries <br><span id="countries">0</span></div>
-    <div class="stat">Favorites <br><span id="fav">0</span></div>
-</div>
+    <div class="note-content">
+      <span class="eyebrow hero-eyebrow">On Display</span>
+      <p class="hero-subheading">A few notes from the drawer</p>
 
-<!-- Slider -->
-<div class="slider">
-    <div class="slide-track">
-        <img src="images/5_euro.jpg">
-        <img src="images/United_States_one_dollar_bill,_obverse.jpg">
-        <img src="images/ARE-10-Front.png">
-        <img src="images/qatar.jpg">
-        <img src="images/WhatsApp Image 2026-02-15 at 9.46.22 PM.jpeg">
-        <img src="images/63ce4f30a7a8d1.74948176-original.jpg">
+      <div class="slider">
+        <div class="slide-track">
+          <figure><img src="images/5_euro.jpg" alt="5 Euro note"></figure>
+          <figure><img src="images/United_States_one_dollar_bill,_obverse.jpg" alt="United States one dollar bill"></figure>
+          <figure><img src="images/ARE-10-Front.png" alt="UAE 10 Dirham note"></figure>
+          <figure><img src="images/qatar.jpg" alt="Qatar currency note"></figure>
+          <figure><img src="images/WhatsApp Image 2026-02-15 at 9.46.22 PM.jpeg" alt="Collection note"></figure>
+          <figure><img src="images/63ce4f30a7a8d1.74948176-original.jpg" alt="Collection note"></figure>
+
+          <!-- duplicate set for seamless loop -->
+          <figure><img src="images/5_euro.jpg" alt="5 Euro note"></figure>
+          <figure><img src="images/United_States_one_dollar_bill,_obverse.jpg" alt="United States one dollar bill"></figure>
+          <figure><img src="images/ARE-10-Front.png" alt="UAE 10 Dirham note"></figure>
+          <figure><img src="images/qatar.jpg" alt="Qatar currency note"></figure>
+          <figure><img src="images/WhatsApp Image 2026-02-15 at 9.46.22 PM.jpeg" alt="Collection note"></figure>
+          <figure><img src="images/63ce4f30a7a8d1.74948176-original.jpg" alt="Collection note"></figure>
+        </div>
+      </div>
+
+      <h1>The Presidential Currency Collection</h1>
+      <p class="tagline">Notes gathered from across the world, each one a small engraved passport &mdash; a private archive of paper, ink and borders, kept by one collector.</p>
+
+      <a href="currency_page.html" class="btn">
+        View the Collection
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </a>
+      <p class="click-hint">Click here to browse the full collection</p>
+
+      <div class="signature">
+        <div class="name">Sandeepsingh Rajput</div>
+        <div class="role">Curator &amp; Collector</div>
+
+      </div>
     </div>
-</div>
+  </div>
+</section>
 
-<!-- Cards -->
-<div class="container">
-    <div class="card">
-        <h3>💰 Foreign Notes</h3>
-        <p>Rare currencies collection</p>
-    </div>
+<!-- Ledger / Stats -->
+<section class="ledger">
+  <div class="ledger-title">
+    <span class="eyebrow lilac">Ledger Summary</span>
+    <h2>The collection, in numbers</h2>
+  </div>
+  <div class="stats">
+    <div class="stat"><span id="notes">0</span><label>Notes held</label></div>
+    <div class="stat"><span id="countries">0</span><label>Countries</label></div>
+    <div class="stat"><span id="fav">0</span><label>Favorites</label></div>
+  </div>
+</section>
 
-    <div class="card">
-        <h3>🌍 Countries</h3>
-        <p>From across the world</p>
-    </div>
+<!-- Catalog -->
+<section class="catalog" id="catalog">
+  <div class="section-head" style="margin-bottom:10px;">
+    <span class="eyebrow lilac">Catalog</span>
+    <h2>How the archive is organized</h2>
+  </div>
 
-    <div class="card">
-        <h3>⭐ Favorites</h3>
-        <p>Euro & Dollar</p>
+  <div class="cat-row">
+    <span class="cat-num">CAT. 01</span>
+    <div class="cat-body">
+      <h3>Foreign Notes</h3>
+      <p>Rare and out-of-circulation currencies, kept for their engraving and history.</p>
     </div>
-</div>
+    <span class="cat-icon">💰</span>
+  </div>
+
+  <div class="cat-row">
+    <span class="cat-num">CAT. 02</span>
+    <div class="cat-body">
+      <h3>Countries</h3>
+      <p>Twelve countries represented so far, spanning four continents.</p>
+    </div>
+    <span class="cat-icon">🌍</span>
+  </div>
+
+  <div class="cat-row">
+    <span class="cat-num">CAT. 03</span>
+    <div class="cat-body">
+      <h3>Favorites</h3>
+      <p>The Euro and the Dollar, kept closest at hand in the collection.</p>
+    </div>
+    <span class="cat-icon">⭐</span>
+  </div>
+</section>
+
+<footer id="contact">
+  <p>Not legal tender in any country. Priceless to the collector. &copy; 2026 Sandeepsingh Rajput.</p>
+</footer>
 
 <!-- Counter Script -->
 <script>
 function animate(id, target){
     let count = 0;
     let speed = target/100;
-
+    let el = document.getElementById(id);
     let update = setInterval(()=>{
         count += speed;
         if(count >= target){
-            document.getElementById(id).innerText = target + "+";
+            el.innerText = target + "+";
             clearInterval(update);
         } else {
-            document.getElementById(id).innerText = Math.floor(count);
+            el.innerText = Math.floor(count);
         }
     },20);
 }
 
-animate("notes",30);
-animate("countries",12);
-animate("fav",5);
+function startCounters(){
+    animate("notes",30);
+    animate("countries",12);
+    animate("fav",5);
+}
+
+if("IntersectionObserver" in window){
+    const target = document.querySelector(".ledger");
+    const obs = new IntersectionObserver((entries)=>{
+        entries.forEach(entry=>{
+            if(entry.isIntersecting){ startCounters(); obs.disconnect(); }
+        });
+    }, { threshold:0.4 });
+    obs.observe(target);
+} else {
+    startCounters();
+}
 </script>
 
 </body>
