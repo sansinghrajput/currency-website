@@ -1,0 +1,1056 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>The Presidential Coin Gallery</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Marcellus&family=Manrope:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+
+<style>
+  :root{
+    --ink:#fffbea;
+    --ink-2:#ffffff;
+    --ink-3:#3a2e05;
+    --paper:#ffffff;
+    --gold:#ffe066;
+    --gold-light:#a67c00;
+    --lilac:#c99a00;
+    --rust:#b8860b;
+    --ivory:#4a3a08;
+    --line: rgba(166,124,0,0.28);
+  }
+
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+
+  body{
+    font-family:'Manrope',sans-serif;
+    background:var(--ink);
+    color:var(--ivory);
+    overflow-x:hidden;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  ::selection{ background:var(--gold); color:var(--ink-3); }
+
+  h1,h2,h3, .display{
+    font-family:'Marcellus', serif;
+    letter-spacing:0.01em;
+  }
+
+  .mono{ font-family:'Space Mono', monospace; }
+
+  .eyebrow{
+    font-family:'Space Mono', monospace;
+    font-size:0.72rem;
+    letter-spacing:0.28em;
+    text-transform:uppercase;
+    color:var(--gold-light);
+  }
+  .eyebrow.lilac{ color:var(--lilac); }
+
+  a{ color:inherit; }
+
+  /* paper-grain texture, faint, over everything */
+  body::before{
+    content:"";
+    position:fixed;
+    inset:0;
+    pointer-events:none;
+    z-index:2;
+    opacity:0.05;
+    mix-blend-mode:overlay;
+    background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='140' height='140'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+  }
+
+  /* ---------- Navbar ---------- */
+  .navbar{
+    width:100%;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    flex-wrap:wrap;
+    row-gap:10px;
+    padding:20px 48px;
+    background:rgba(255,251,234,0.78);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line);
+    position:sticky;
+    top:0;
+    z-index:50;
+  }
+
+  .nav-links{ display:flex; flex-wrap:wrap; row-gap:8px; }
+
+  .brand{ display:flex; align-items:center; gap:12px; }
+
+  .seal{
+    width:34px; height:34px;
+    border-radius:50%;
+    border:1.5px solid var(--gold);
+    display:flex; align-items:center; justify-content:center;
+    font-family:'Marcellus', serif;
+    font-size:0.85rem;
+    color:var(--gold-light);
+    position:relative;
+  }
+  .seal::before{
+    content:"";
+    position:absolute; inset:4px;
+    border:1px solid var(--line);
+    border-radius:50%;
+  }
+
+  .navbar h2{
+    font-family:'Marcellus', serif;
+    font-size:1.05rem;
+    color:var(--gold-light);
+    font-weight:400;
+    letter-spacing:0.03em;
+  }
+
+  .nav-links a{
+    text-decoration:none;
+    margin-left:32px;
+    font-size:0.82rem;
+    letter-spacing:0.12em;
+    text-transform:uppercase;
+    color:var(--ivory);
+    opacity:0.75;
+    transition:opacity .25s ease, color .25s ease;
+    padding-bottom:4px;
+    border-bottom:1px solid transparent;
+  }
+  .nav-links a:hover{ opacity:1; color:var(--gold-light); border-bottom-color:var(--gold); }
+  .nav-links a.active{ opacity:1; color:var(--gold-light); border-bottom-color:var(--gold); }
+
+  /* ---------- Gallery Header ---------- */
+  .gallery-header{
+    padding:0 24px 30px;
+    display:flex;
+    justify-content:center;
+  }
+
+  .header-note{
+    position:relative;
+    width:min(920px, 100%);
+    padding:44px 40px 40px;
+    text-align:center;
+    background:
+      linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0.05)),
+      var(--ink-2);
+    border:1px solid var(--line);
+    border-radius:6px;
+    overflow:hidden;
+    box-shadow:0 24px 60px -20px rgba(74,58,8,0.18);
+    margin-top:40px;
+  }
+
+  .header-note::before{
+    content:"";
+    position:absolute; inset:14px;
+    border:1px solid var(--line);
+    border-radius:3px;
+    pointer-events:none;
+  }
+  .header-note::after{
+    content:"";
+    position:absolute; inset:0;
+    pointer-events:none;
+    opacity:0.5;
+    background:
+      repeating-linear-gradient(115deg, transparent 0 6px, var(--line) 6px 7px, transparent 7px 13px),
+      repeating-linear-gradient(65deg, transparent 0 6px, rgba(166,124,0,0.14) 6px 7px, transparent 7px 13px);
+    mask-image: radial-gradient(ellipse at center, black 30%, transparent 72%);
+  }
+
+  .header-note-content{ position:relative; z-index:1; }
+
+  .header-note h1{
+    font-size:clamp(1.9rem, 4vw, 3rem);
+    line-height:1.15;
+    color:var(--ivory);
+    background:linear-gradient(100deg, var(--gold-light), var(--ivory) 45%, var(--gold-light));
+    -webkit-background-clip:text;
+    background-clip:text;
+    color:transparent;
+    margin-top:12px;
+  }
+
+  .header-note p.tagline{
+    margin-top:16px;
+    font-size:0.98rem;
+    color:rgba(74,58,8,0.68);
+  }
+
+  .header-note p.tagline strong{
+    color:var(--gold-light);
+    font-weight:600;
+  }
+
+  /* ---------- Ledger / stats ---------- */
+  .ledger{
+    max-width:920px;
+    margin:0 auto 50px;
+    padding:0 24px;
+  }
+  .stats{
+    display:flex;
+    border-top:1px solid var(--line);
+    border-bottom:1px solid var(--line);
+  }
+  .stat{
+    flex:1;
+    text-align:center;
+    padding:28px 10px;
+    position:relative;
+  }
+  .stat + .stat::before{
+    content:"";
+    position:absolute;
+    left:0; top:20%; bottom:20%;
+    width:1px;
+    background:var(--line);
+  }
+  .stat span{
+    display:block;
+    font-family:'Space Mono', monospace;
+    font-size:2.2rem;
+    font-weight:700;
+    color:var(--gold-light);
+  }
+  .stat label{
+    display:block;
+    margin-top:8px;
+    font-size:0.7rem;
+    letter-spacing:0.2em;
+    text-transform:uppercase;
+    color:rgba(74,58,8,0.6);
+  }
+
+  /* ---------- Gallery ---------- */
+  .gallery{
+    max-width:1300px;
+    margin:0 auto;
+    padding:20px 24px 70px;
+    display:grid;
+    grid-template-columns:repeat(auto-fill, minmax(170px, 1fr));
+    gap:26px;
+  }
+
+  .card{
+    position:relative;
+    background:var(--paper);
+    border:1px solid var(--line);
+    border-radius:10px;
+    padding:20px 14px 18px;
+    text-align:center;
+    box-shadow:0 14px 32px -14px rgba(74,58,8,0.22);
+    transition:transform .3s ease, box-shadow .3s ease;
+  }
+
+  .card:hover{
+    transform:translateY(-6px);
+    box-shadow:0 20px 40px -12px rgba(74,58,8,0.28);
+  }
+
+  .coin-slot{
+    position:relative;
+    z-index:1;
+    width:112px;
+    height:112px;
+    margin:0 auto 14px;
+    border-radius:50%;
+    background:
+      radial-gradient(circle at 32% 28%, rgba(255,255,255,0.9), transparent 45%),
+      radial-gradient(circle at center, #fff4c2, #ffe066 55%, #c99a00 100%);
+    border:3px solid var(--gold-light);
+    box-shadow:
+      inset 0 0 0 4px rgba(255,255,255,0.35),
+      inset 0 2px 6px rgba(74,58,8,0.25),
+      0 6px 14px -6px rgba(74,58,8,0.35);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    overflow:hidden;
+  }
+
+  .coin-slot::before{
+    content:"";
+    position:absolute;
+    inset:8px;
+    border-radius:50%;
+    border:1px dashed rgba(74,58,8,0.35);
+  }
+
+  .coin-slot img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    border-radius:50%;
+  }
+
+  .coin-slot .coin-mark{
+    font-family:'Marcellus', serif;
+    font-size:1.4rem;
+    color:var(--gold-light);
+    opacity:0.55;
+  }
+
+  .card h3{
+    position:relative;
+    z-index:1;
+    font-size:1rem;
+    font-weight:400;
+    color:var(--ivory);
+    margin-bottom:2px;
+  }
+
+  .card span.country{
+    position:relative;
+    z-index:1;
+    display:block;
+    font-size:0.78rem;
+    color:rgba(74,58,8,0.55);
+    letter-spacing:0.02em;
+  }
+
+  /* ---------- Footer ---------- */
+  footer{
+    text-align:center;
+    padding:34px 24px 50px;
+    border-top:1px solid var(--line);
+  }
+  footer p{
+    font-family:'Space Mono', monospace;
+    font-size:0.7rem;
+    letter-spacing:0.06em;
+    color:rgba(74,58,8,0.5);
+  }
+
+  /* ---------- Responsive ---------- */
+  @media (max-width: 720px){
+    .navbar{ padding:16px 20px; }
+    .nav-links a{ margin-left:16px; font-size:0.7rem; }
+    .header-note{ padding:32px 20px 30px; }
+    .gallery{ grid-template-columns:repeat(auto-fill, minmax(130px, 1fr)); gap:16px; }
+    .coin-slot{ width:88px; height:88px; }
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    body::before{ display:none; }
+  }
+
+  a:focus-visible{
+    outline:2px solid var(--gold-light);
+    outline-offset:3px;
+  }
+</style>
+</head>
+
+<body>
+
+<nav class="navbar">
+  <div class="brand">
+    <div class="seal">SR</div>
+    <h2>Sandeepsingh Rajput</h2>
+  </div>
+  <div class="nav-links">
+    <a href="index.html">Home</a>
+    <a href="currency_page.html">Notes</a>
+    <a href="coin_page.html" class="active">Coins</a>
+    <a href="index.html#contact">Contact</a>
+  </div>
+</nav>
+
+<section class="gallery-header">
+  <div class="header-note">
+    <div class="header-note-content">
+      <span class="eyebrow">On Display</span>
+      <h1>The Presidential Coin Gallery</h1>
+      <p class="tagline">Coin collection by <strong>Sandeepsingh Rajput</strong></p>
+    </div>
+  </div>
+</section>
+
+
+
+<!-- Each card below is a blank placeholder: replace the img src and country name for every coin -->
+<section class="gallery" id="coin-gallery">
+
+
+<div class="card">
+  <div class="coin-slot">
+    <img src="C:\coins\1annaeastindia.jpg">
+  </div>
+  <h3>One Quarter Anna (Front) </h3>
+  <span class="country">India 1806</span>
+</div> 
+
+<div class="card">
+  <div class="coin-slot">
+    <img src="C:\coins\1annaeastindiaback.jpg">
+  </div>
+  <h3>One Quarter Anna  (Back) </h3>
+  <span class="country">India 1806</span>
+</div> 
+
+
+<div class="card">
+  <div class="coin-slot">
+    <img src="C:\coins\1annafront.jpg">
+  </div>
+  <h3>One Quarter Anna (Front)</h3>
+  <span class="country"> India 1862</span>
+</div>
+
+
+
+
+<div class="card">
+  <div class="coin-slot">
+    <img src="C:\coins\oannaback.jpg">
+  </div>
+  <h3>One Quarter Anna  (Back) </h3>
+  <span class="country">India 1862</span>
+</div>
+
+
+
+<div class="card">
+  <div class="coin-slot">
+    <img src="C:\coins\oneanna1906.jpg">
+  </div>
+  <h3>One Quarter Anna (Front)</h3>
+  <span class="country">India 1906</span>
+</div>
+
+
+<div class="card">
+  <div class="coin-slot">
+    <img src="C:\coins\oneannaback1906.webp">
+  </div>
+  <h3>One Quarter Anna (Back)</h3>
+  <span class="country">India 1906</span>
+</div>
+
+
+<div class="card">
+  <div class="coin-slot">
+    <img src="C:\coins\halfanna1862.jpg">
+  </div>
+  <h3>Half Anna (Front)</h3>
+  <span class="country">India 1906</span>
+</div>
+
+
+<div class="card">
+  <div class="coin-slot">
+    <img src="C:\coins\halfannaback.jpg">
+  </div>
+  <h3>Half Anna (Back)</h3>
+  <span class="country">India 1916</span>
+</div>
+
+<div class="card">
+  <div class="coin-slot">
+    <img src="C:\coins\onerupee1916.jpeg">
+  </div>
+  <h3>One Rupee (Front) (Silver)</h3>
+  <span class="country">India 1916</span>
+</div>
+
+
+<div class="card">
+  <div class="coin-slot">
+    <img src="C:\coins\onerupeeback.jpeg">
+  </div>
+  <h3>One Rupee (Back) (Silver)</h3>
+  <span class="country">India 1906</span>
+</div>
+
+
+
+
+
+<div class="card">
+  <div class="coin-slot">
+    <img src="C:\coins\1_4portugese.jpg">
+  </div>
+  <h3>1/4 rupia (Front) (Portuguese Mint)</h3>
+  <span class="country">India 1947</span>
+</div>
+
+
+<div class="card">
+  <div class="coin-slot">
+    <img src="C:\coins\1_4portugeseback.jpg">
+  </div>
+  <h3>1/4 rupia (Back) (Portuguese Mint)</h3>
+  <span class="country">India 1947</span>
+</div>
+
+<div class="card">
+  <div class="coin-slot">
+    <img src="C:\coins\60purtu.webp">
+  </div>
+  <h3>60 centavos (Front) (Portuguese Mint)</h3>
+  <span class="country">India 1959</span>
+</div>
+
+
+<div class="card">
+  <div class="coin-slot">
+    <img src="C:\coins\60putuback.jpg">
+  </div>
+  <h3>60 centavos (Back) (Portuguese Mint)</h3>
+  <span class="country">India 1959</span>
+</div>
+
+
+<div class="card">
+  <div class="coin-slot">
+    <img src="C:\coins\2euro.webp">
+  </div>
+  <h3>2 Euros</h3>
+  <span class="country">European Union</span>
+</div>
+
+<div class="card">
+  <div class="coin-slot">
+    <img src="C:\coins\Common_face_of_one_euro_coin.png">
+  </div>
+  <h3>1 Euro</h3>
+  <span class="country">European Union</span>
+</div>
+
+<div class="card">
+  <div class="coin-slot">
+    <img src="C:\coins\images.jpg">
+  </div>
+  <h3>20 Euro Cents</h3>
+  <span class="country">European Union</span>
+</div>
+
+<div class="card">
+  <div class="coin-slot">
+    <img src="C:\coins\10_eurocent_common_2007.png">
+  </div>
+  <h3>10 Euro Cents</h3>
+  <span class="country">European Union</span>
+</div>
+
+
+<div class="card">
+  <div class="coin-slot">
+    <img src="C:\coins\5euro.jpg">
+  </div>
+  <h3>5 Euro Cents</h3>
+  <span class="country">European Union</span>
+</div>
+
+<div class="card">
+  <div class="coin-slot">
+    <img src="C:\coins\venezuale.jpg">
+  </div>
+  <h3>1 Bolivar</h3>
+  <span class="country">Venezuale</span>
+</div>
+
+
+
+<div class="card">
+  <div class="coin-slot">
+    <img src="C:\coins\baharain.jpg">
+  </div>
+  <h3>100 Fills </h3>
+  <span class="country">Bahrain</span>
+</div>
+
+<div class="card">
+  <div class="coin-slot">
+    <img src="C:\coins\25turky.jpg">
+  </div>
+  <h3>25 Kurus</h3>
+  <span class="country">Turkey</span>
+</div>
+
+<div class="card">
+  <div class="coin-slot">
+    <img src="C:\coins\1turky.jpg">
+  </div>
+  <h3>1 Turk Lirasi</h3>
+  <span class="country">Turkey</span>
+</div>
+
+<div class="card">
+  <div class="coin-slot">
+    <img src="C:\coins\1usa.jpg">
+  </div>
+  <h3>1 Cent</h3>
+  <span class="country">United States of America</span>
+</div>
+
+<div class="card">
+  <div class="coin-slot">
+    <img src="C:\coins\quarusa.jpg">
+  </div>
+  <h3>Quarter Dollar</h3>
+  <span class="country">United States of America</span>
+</div>
+
+<div class="card">
+  <div class="coin-slot">
+    <img src="C:\coins\5usa.jpg">
+  </div>
+  <h3>5 Cent</h3>
+  <span class="country">United States of America</span>
+</div>
+
+<div class="card">
+  <div class="coin-slot">
+    <img src="C:\coins\saudi1111.jpg">
+  </div>
+  <h3>1 Riyal</h3>
+  <span class="country">Saudi Arabia</span>
+</div>
+
+<div class="card">
+  <div class="coin-slot">
+    <img src="C:\coins\25saudi.jpg">
+  </div>
+  <h3>25 Halalah</h3>
+  <span class="country">Saudi Arabia</span>
+</div>
+
+<div class="card">
+  <div class="coin-slot">
+    <img src="C:\coins\25oman.jpg">
+  </div>
+  <h3>25 Baisa</h3>
+  <span class="country">Oman</span>
+</div>
+
+<div class="card">
+  <div class="coin-slot">
+    <img src="C:\coins\1pennyuk.jpg">
+  </div>
+  <h3>1 Penny</h3>
+  <span class="country">England</span>
+</div>
+
+<div class="card">
+  <div class="coin-slot">
+    <img src="C:\coins\20uk.png">
+  </div>
+  <h3>25 Pence</h3>
+  <span class="country">England</span>
+</div>
+
+<div class="card">
+  <div class="coin-slot">
+    <img src="C:\coins\1uk.jpg">
+  </div>
+  <h3>1 Pound</h3>
+  <span class="country">England</span>
+</div>
+
+<div class="card">
+  <div class="coin-slot">
+    <img src="C:\coins\china.jpg">
+  </div>
+  <h3>1 Yi Jiao</h3>
+  <span class="country">China</span>
+</div>
+
+<div class="card">
+  <div class="coin-slot">
+    <img src="C:\coins\japan.jpg">
+  </div>
+  <h3>1 Yen</h3>
+  <span class="country">Japan</span>
+</div>
+
+<div class="card">
+  <div class="coin-slot">
+    <img src="C:\coins\5kuwaitl.jpg">
+  </div>
+  <h3>5 Fils </h3>
+  <span class="country">Kuwait</span>
+</div>
+
+<div class="card">
+  <div class="coin-slot">
+    <img src="C:\coins\50kuwait.jpg">
+  </div>
+  <h3>50 Fils</h3>
+  <span class="country">Kuwait</span>
+</div>
+
+<div class="card">
+  <div class="coin-slot">
+    <img src="C:\coins\1mexico.jpg">
+  </div>
+  <h3>1 Peso</h3>
+  <span class="country">Mexico</span>
+</div>
+
+<div class="card">
+  <div class="coin-slot">
+    <img src="C:\coins\imalayasia.jpg">
+  </div>
+  <h3>1 Sen</h3>
+  <span class="country">Malaysia</span>
+</div>
+<div class="card">
+  <div class="coin-slot">
+    <img src="C:\coins\5malasia.jpg">
+  </div>
+  <h3>5 Sen</h3>
+  <span class="country">Malaysia</span>
+</div>
+<div class="card">
+  <div class="coin-slot">
+    <img src="C:\coins\10malaya.jpg">
+  </div>
+  <h3>10 Sen</h3>
+  <span class="country">Malaysia</span>
+</div>
+<div class="card">
+  <div class="coin-slot">
+    <img src="C:\coins\20malaya.jpg">
+  </div>
+  <h3>20 Sen</h3>
+  <span class="country">Malaysia</span>
+</div>
+<div class="card">
+  <div class="coin-slot">
+    <img src="C:\coins\50malaya.jpg">
+  </div>
+  <h3>50 Sen</h3>
+  <span class="country">Malaysia</span>
+</div>
+
+
+<div class="card">
+  <div class="coin-slot">
+    <img src="C:\coins\1russia.jpg">
+  </div>
+  <h3>1 Rubles</h3>
+  <span class="country">Russia</span>
+</div>
+
+<div class="card">
+  <div class="coin-slot">
+    <img src="C:\coins\10russia.jpg">
+  </div>
+  <h3>10 Koneek (Soviet Union)</h3>
+  <span class="country">Russia</span>
+</div>
+
+<div class="card">
+  <div class="coin-slot">
+    <img src="C:\coins\1nepaal.jpg">
+  </div>
+  <h3>1 Rupee</h3>
+  <span class="country">Nepal</span>
+</div>
+
+<div class="card">
+  <div class="coin-slot">
+    <img src="C:\coins\2nepal.webp">
+  </div>
+  <h3>2 Rupees</h3>
+  <span class="country">Nepal</span>
+</div>
+
+<div class="card">
+  <div class="coin-slot">
+    <img src="C:\coins\22nepal.jpg">
+  </div>
+  <h3>2 Rupees</h3>
+  <span class="country">Nepal</span>
+</div>
+
+<div class="card">
+  <div class="coin-slot">
+    <img src="C:\coins\1thai.jpg">
+  </div>
+  <h3>1 Bhat</h3>
+  <span class="country">Thailand</span>
+</div>
+
+<div class="card">
+  <div class="coin-slot">
+    <img src="C:\coins\5thai.jpg">
+  </div>
+  <h3>5 Bhat</h3>
+  <span class="country">Thailand</span>
+</div>
+
+<div class="card">
+  <div class="coin-slot">
+    <img src="C:\coins\111thai.jpg">
+  </div>
+  <h3>1 Bhat</h3>
+  <span class="country">Thailand</span>
+</div>
+
+<div class="card">
+  <div class="coin-slot">
+    <img src="C:\coins\10thai.jpg">
+  </div>
+  <h3>10 Bhat</h3>
+  <span class="country">Thailand</span>
+</div>
+
+<div class="card">
+  <div class="coin-slot">
+    <img src="C:\coins\5swuiss.jpg">
+  </div>
+  <h3>5 Centimes</h3>
+  <span class="country">Switzerland</span>
+</div>
+
+<div class="card">
+  <div class="coin-slot">
+    <img src="C:\coins\25qatar.jpg">
+  </div>
+  <h3>25 Dirhams</h3>
+  <span class="country">Qatar</span>
+</div>
+
+<div class="card">
+  <div class="coin-slot">
+    <img src="C:\coins\50qatar.jpg">
+  </div>
+  <h3>50 Dirhams</h3>
+  <span class="country">Qatar</span>
+</div>
+
+<div class="card">
+  <div class="coin-slot">
+    <img src="C:\coins\1lanka.jpg">
+  </div>
+  <h3>1 Rupee</h3>
+  <span class="country">Sri Lanka</span>
+</div>
+
+<div class="card">
+  <div class="coin-slot">
+    <img src="C:\coins\2lankz.jpg">
+  </div>
+  <h3>2 Rupees</h3>
+  <span class="country">Sri Lanka</span>
+</div>
+
+<div class="card">
+  <div class="coin-slot">
+    <img src="C:\coins\5lanka.jpg">
+  </div>
+  <h3>5 Rupees</h3>
+  <span class="country">Sri Lanka</span>
+</div>
+<div class="card">
+  <div class="coin-slot">
+    <img src="C:\coins\50korea.jpg">
+  </div>
+  <h3>50 Won</h3>
+  <span class="country">South Korea</span>
+</div>
+
+<div class="card">
+  <div class="coin-slot">
+    <img src="C:\coins\100korea.jpg">
+  </div>
+  <h3>100 Won</h3>
+  <span class="country">South Korea</span>
+</div>
+
+
+<div class="card">
+  <div class="coin-slot">
+    <img src="C:\coins\1uae.jpg">
+  </div>
+  <h3>1 Dirham</h3>
+  <span class="country">United Arab Emirates</span>
+</div>
+
+<div class="card">
+  <div class="coin-slot">
+    <img src="C:\coins\20uae.jpg">
+  </div>
+  <h3>25 Fils</h3>
+  <span class="country">United Arab Emirates</span>
+</div>
+
+<div class="card">
+  <div class="coin-slot">
+    <img src="C:\coins\20hongkong.webp">
+  </div>
+  <h3>20 Cents</h3>
+  <span class="country">Hong Kong</span>
+</div>
+
+<div class="card">
+  <div class="coin-slot">
+    <img src="C:\coins\1singapore.jpg">
+  </div>
+  <h3>1 Cent</h3>
+  <span class="country">Singapore</span>
+</div>
+
+<div class="card">
+  <div class="coin-slot">
+    <img src="C:\coins\5singapore.jpg">
+  </div>
+  <h3>5 Cent</h3>
+  <span class="country">Singapore</span>
+</div>
+
+
+<div class="card">
+  <div class="coin-slot">
+    <img src="C:\coins\10singapore.jpg">
+  </div>
+  <h3>10 Cent</h3>
+  <span class="country">Singapore</span>
+</div>
+
+<div class="card">
+  <div class="coin-slot">
+    <img src="C:\coins\1poland.jpg">
+  </div>
+  <h3>1 Groszy</h3>
+  <span class="country">Poland</span>
+</div>
+
+<div class="card">
+  <div class="coin-slot">
+    <img src="C:\coins\20poland.jpg">
+  </div>
+  <h3>20 Groszy</h3>
+  <span class="country">Poland</span>
+</div>
+<div class="card">
+  <div class="coin-slot">
+    <img src="C:\coins\10africa.jpg">
+  </div>
+  <h3>10 Cents</h3>
+  <span class="country">South Africa</span>
+</div>
+
+<div class="card">
+  <div class="coin-slot">
+    <img src="C:\coins\5colombia.jpg">
+  </div>
+  <h3>5 Pesos</h3>
+  <span class="country">Columbia</span>
+</div>
+
+<div class="card">
+  <div class="coin-slot">
+    <img src="C:\coins\5austalia.jpg">
+  </div>
+  <h3>5 Cents</h3>
+  <span class="country">Australia</span>
+</div>
+
+<div class="card">
+  <div class="coin-slot">
+    <img src="C:\coins\50bangla.jpg">
+  </div>
+  <h3>50 Poisho</h3>
+  <span class="country">Bangladesh</span>
+</div>
+
+<div class="card">
+  <div class="coin-slot">
+    <img src="C:\coins\5canada.webp">
+  </div>
+  <h3>5 Cents</h3>
+  <span class="country">Canada</span>
+</div>
+
+<div class="card">
+  <div class="coin-slot">
+    <img src="C:\coins\10sweden.jpg">
+  </div>
+  <h3>10 Ore</h3>
+  <span class="country">Sweden</span>
+</div>
+
+<div class="card">
+  <div class="coin-slot">
+    <img src="C:\coins\25sweden.jpg">
+  </div>
+  <h3>25 Ore</h3>
+  <span class="country">Sweden</span>
+</div>
+
+<div class="card">
+  <div class="coin-slot">
+    <img src="C:\coins\50sweden.jpg">
+  </div>
+  <h3>50 Ore</h3>
+  <span class="country">Sweden</span>
+</div>
+
+<div class="card">
+  <div class="coin-slot">
+    <img src="C:\coins\1krsweden.jpg">
+  </div>
+  <h3>1 Kronor</h3>
+  <span class="country">Sweden</span>
+</div>
+
+<div class="card">
+  <div class="coin-slot">
+    <img src="C:\coins\5krseweden.jpg">
+  </div>
+  <h3>5 Kronor</h3>
+  <span class="country">Sweden</span>
+</div>
+
+<div class="card">
+  <div class="coin-slot">
+    <img src="C:\coins\1philipines.jpg">
+  </div>
+  <h3>1 Piso</h3>
+  <span class="country">Philipines</span>
+</div>
+
+<div class="card">
+  <div class="coin-slot">
+    <img src="C:\coins\1romania.jpg">
+  </div>
+  <h3>1 Leu</h3>
+  <span class="country">Romania</span>
+</div>
+
+<div class="card">
+  <div class="coin-slot">
+    <img src="C:\coins\10pfenning.jpg">
+  </div>
+  <h3>10 Pfenning</h3>
+  <span class="country">Deutschland</span>
+</div>
+
+<div class="card">
+  <div class="coin-slot">
+    <img src="C:\coins\5france.jpg">
+  </div>
+  <h3>5 Centimes</h3>
+  <span class="country">France</span>
+</div>
+
+</section>
+
+<footer id="contact">
+  <p>© 2026 Sandeepsingh Rajput · Presidential Coin Collection</p>
+</footer>
+
+</body>
+</html>
