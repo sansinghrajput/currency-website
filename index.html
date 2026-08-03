@@ -241,6 +241,19 @@
   .btn:hover{ transform:translateY(-2px); box-shadow:0 16px 36px -8px rgba(11,114,133,0.4); }
   .btn svg{ width:14px; height:14px; }
 
+  .btn-row{
+    margin-top:34px;
+    display:flex;
+    flex-wrap:wrap;
+    gap:16px;
+    justify-content:center;
+  }
+  .btn-row .btn{ margin-top:0; }
+  .btn.btn-secondary{
+    background:linear-gradient(180deg, #fff4c2, var(--lilac));
+    color:#3a2e05;
+  }
+
   .signature{
     margin-top:46px;
     display:inline-block;
@@ -446,7 +459,8 @@
   </div>
   <div class="nav-links">
     <a href="#home">Home</a>
-    <a href="currency_page.html">Collection</a>
+    <a href="currency_page.html">Notes</a>
+    <a href="coin_page.html">Coins</a>
     <a href="#catalog">Catalog</a>
     <a href="#contact">Contact</a>
   </div>
@@ -483,10 +497,16 @@
       <h1>The Presidential Currency Collection</h1>
       <p class="tagline">Notes gathered from across the world, each one a small engraved passport &mdash; a private archive of paper, ink and borders, kept by one collector.</p>
 
-      <a href="currency_page.html" class="btn">
-        View the Collection
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-      </a>
+      <div class="btn-row">
+        <a href="currency_page.html" class="btn">
+          View the Notes
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a>
+        <a href="coin_page.html" class="btn btn-secondary">
+          View the Coins
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a>
+      </div>
       <p class="click-hint">Click here to browse the full collection</p>
 
       <div class="signature">
@@ -506,6 +526,7 @@
   </div>
   <div class="stats">
     <div class="stat"><span id="notes">0</span><label>Notes held</label></div>
+    <div class="stat"><span id="coins">0</span><label>Coins held</label></div>
     <div class="stat"><span id="countries">0</span><label>Countries</label></div>
     <div class="stat"><span id="fav">0</span><label>Favorites</label></div>
   </div>
@@ -530,6 +551,15 @@
   <div class="cat-row">
     <span class="cat-num">CAT. 02</span>
     <div class="cat-body">
+      <h3>Foreign Coins</h3>
+      <p>Coins collected from across the world, including historic Indian anna and rupee pieces.</p>
+    </div>
+    <span class="cat-icon">🪙</span>
+  </div>
+
+  <div class="cat-row">
+    <span class="cat-num">CAT. 03</span>
+    <div class="cat-body">
       <h3>Countries</h3>
       <p>Twelve countries represented so far, spanning four continents.</p>
     </div>
@@ -537,7 +567,7 @@
   </div>
 
   <div class="cat-row">
-    <span class="cat-num">CAT. 03</span>
+    <span class="cat-num">CAT. 04</span>
     <div class="cat-body">
       <h3>Favorites</h3>
       <p>The Euro and the Dollar, kept closest at hand in the collection.</p>
@@ -569,6 +599,7 @@ function animate(id, target){
 
 function startCounters(){
     animate("notes",30);
+    animate("coins",81);
     animate("countries",12);
     animate("fav",5);
 }
